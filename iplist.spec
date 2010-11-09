@@ -1,13 +1,15 @@
 %define name	iplist
-%define version	0.28
+%define version	0.29
 %define release	1
 
 Summary:	List based packet handler
 Name:		%{name}
 Version:	%{version}
 Release:	%mkrel %{release}
-Source0:	%{name}-%{version}.tar.gz
+Source0:	%{name}-%{version}.tar.bz2
 Patch0:		iplist-0.28-fix-init.patch
+Patch1:		iplist-0.29-unsigned_char.patch
+Patch2:		iplist-0.29-linking.patch
 License:	GPLv2+
 Group:		System/Configuration/Networking
 URL:		http://iplist.sourceforge.net/
@@ -28,14 +30,16 @@ library (kernel 2.6.14 or later). It filters by IP-address and is optimized
 for thousands of IP-address ranges.
 
 %prep
-%setup -q
+%setup -q -n %{name}
 %patch0 -p0
+%patch1 -p0
+%patch2 -p0
 
 # fix compiler flags
 sed -i -e 's|-O2|%{optflags}|' Makefile
 
 %build
-%make
+%make LDFLAGS="%{ldflags}"
 
 %install
 rm -rf %{buildroot}
@@ -88,12 +92,12 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc debian/copyright changelog ipblock.lists allow.p2p ipblock.conf
+%doc debian/copyright changelog THANKS
 %config(noreplace) %{_sysconfdir}/ipblock.conf
 %config(noreplace) %{_sysconfdir}/ipblock.lists
-%{_sysconfdir}/pam.d/ipblock
-%{_sysconfdir}/security/console.apps/ipblock
-%{_sysconfdir}/cron.daily/ipblock
+%config(noreplace) %{_sysconfdir}/pam.d/ipblock
+%config(noreplace) %{_sysconfdir}/security/console.apps/ipblock
+%config(noreplace) %{_sysconfdir}/cron.daily/ipblock
 %{_initrddir}/ipblock
 %{_sbindir}/iplist
 %{_sbindir}/ipblock
