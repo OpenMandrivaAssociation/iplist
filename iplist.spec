@@ -1,6 +1,6 @@
 %define name	iplist
 %define version	0.29
-%define release	1
+%define release	2
 
 Summary:	List based packet handler
 Name:		%{name}
@@ -22,6 +22,7 @@ Requires(post):         rpm-helper
 Requires(preun):        rpm-helper
 Requires:       java >= 1.6
 Requires:       usermode-consoleonly
+Requires:	wget
 Provides:	ipblock = %{version}-%{release}
 
 %description
