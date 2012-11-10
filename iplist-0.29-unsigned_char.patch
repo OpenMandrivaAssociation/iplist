@@ -1,0 +1,21 @@
+diff -p -up ./src/nfq.cc.orig ./src/nfq.cc
+--- ./src/nfq.cc.orig	2010-11-08 21:49:50.000000000 +0100
++++ ./src/nfq.cc	2010-11-08 21:51:15.000000000 +0100
+@@ -92,7 +92,7 @@ int nfq::nfq_hook::cb(nfq_q_handle* qh,
+ {
+ 	int err;
+ 	uint32_t id;
+-	char* data;
++	unsigned char* data;
+ 	nfqnl_msg_packet_hdr* ph;
+ 	range::range_set_t::iterator i;
+ 
+@@ -144,7 +144,7 @@ void nfq::nfq_hook::print_pkt(std::strin
+ 		nfq_data* nfa, nfqnl_msg_packet_hdr* ph)
+ {
+ 	packet_msg pkt;
+-	char* data;
++	unsigned char* data;
+ 
+ 	if (nfq_get_timestamp(nfa, &pkt.tv)) 
+ 		gettimeofday(&pkt.tv, NULL);

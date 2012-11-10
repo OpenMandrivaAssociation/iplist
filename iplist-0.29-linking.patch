@@ -1,0 +1,14 @@
+diff -p -up ./Makefile.orig ./Makefile
+--- ./Makefile.orig	2010-11-08 21:53:59.000000000 +0100
++++ ./Makefile	2010-11-08 21:55:23.000000000 +0100
+@@ -39,8 +39,8 @@ FILENAME := iplist
+ all: $(FILENAME)
+ 
+ $(FILENAME): $(OBJECTS)
+-	$(CPP) $(CPPFLAGS) $(INCLUDE) $(LIBS) ${OBJECTS} -o $(FILENAME)
+-	strip $@
++	$(CPP) $(CPPFLAGS) $(LDFLAGS) $(INCLUDE) ${OBJECTS} -o $(FILENAME) $(LIBS)
++#	strip $@
+ 
+ %.o: %.cc
+ 	$(CPP) $(CPPFLAGS) $(INCLUDE) -c $<

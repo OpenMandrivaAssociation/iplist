@@ -1,0 +1,12 @@
+diff -p -up ./fedora/ipblock.init.orig ./fedora/ipblock.init
+--- ./fedora/ipblock.init.orig  2010-03-21 14:22:33.000000000 +0000
++++ ./fedora/ipblock.init       2010-03-21 14:22:42.000000000 +0000
+@@ -7,7 +7,6 @@
+ # Provides:          ipblock
+ # Required-Start:    $local_fs $network $syslog
+ # Required-Stop:     $local_fs
+-# Default-Start:     2 3 4 5
+ # Default-Stop:      0 1 6
+ # Short-Description: ipblock initscript
+ # Description:       Start ipblock at boot time if AUTOSTART is set
+
