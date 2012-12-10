@@ -1,19 +1,15 @@
-%define name	iplist
-%define version	0.29
-%define release	2
-
 Summary:	List based packet handler
-Name:		%{name}
-Version:	%{version}
-Release:	%mkrel %{release}
+Name:		iplist
+Version:	0.29
+Release:	2
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		iplist-0.28-fix-init.patch
 Patch1:		iplist-0.29-unsigned_char.patch
 Patch2:		iplist-0.29-linking.patch
+patch3:		iplist-0.29-cstdlib.patch
 License:	GPLv2+
 Group:		System/Configuration/Networking
 URL:		http://iplist.sourceforge.net/
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:	gcc-c++
 BuildRequires:	zlib-devel
 BuildRequires:	netfilter_queue-devel
@@ -35,6 +31,7 @@ for thousands of IP-address ranges.
 %patch0 -p0
 %patch1 -p0
 %patch2 -p0
+%patch3 -p1 -b .cstdlib
 
 # fix compiler flags
 sed -i -e 's|-O2|%{optflags}|' Makefile
@@ -43,7 +40,6 @@ sed -i -e 's|-O2|%{optflags}|' Makefile
 %make LDFLAGS="%{ldflags}"
 
 %install
-rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{_sbindir}
 mkdir -p %{buildroot}%{_bindir}
@@ -82,9 +78,6 @@ install -p -m 644 allow.p2p %{buildroot}%{_var}/cache/iplist/
 
 %makeinstall_std
 
-%clean
-rm -rf %{buildroot}
-
 %post
 %_post_service ipblock
 
@@ -109,3 +102,18 @@ rm -rf %{buildroot}
 %{_javadir}/ipblockUI.jar
 %{_datadir}/applications/ipblock.desktop
 %{_datadir}/icons/ipblock.png
+
+
+%changelog
+* Tue Apr 19 2011 Jani Välimaa <wally@mandriva.org> 0.29-2mdv2011.0
++ Revision: 655877
+- require wget (mdv#63075)
+- new version 0.29
+- add patch to fix build
+- add patch to fix linking, disable strip and use ldflags
+
+* Sun Mar 21 2010 Jani Välimaa <wally@mandriva.org> 0.28-1mdv2010.1
++ Revision: 526170
+- import iplist
+
+
