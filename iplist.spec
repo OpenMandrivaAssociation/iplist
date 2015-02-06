@@ -1,7 +1,7 @@
 Summary:	List based packet handler
 Name:		iplist
 Version:	0.29
-Release:	2
+Release:	3
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		iplist-0.28-fix-init.patch
 Patch1:		iplist-0.29-unsigned_char.patch
