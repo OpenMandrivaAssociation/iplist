@@ -9,7 +9,7 @@ Patch2:		iplist-0.29-linking.patch
 patch3:		iplist-0.29-cstdlib.patch
 License:	GPLv2+
 Group:		System/Configuration/Networking
-URL:		http://iplist.sourceforge.net/
+URL:		https://iplist.sourceforge.net/
 BuildRequires:	gcc-c++
 BuildRequires:	zlib-devel
 BuildRequires:	netfilter_queue-devel
